@@ -64,7 +64,7 @@ public class Users {
     }
 
     public int getRole_id() {
-        return role_1d;
+        return role_id;
     }
 
     public void setRole_id(int role_id) {
@@ -76,7 +76,7 @@ public class Users {
         if (object == null || getClass() != object.getClass()) return false;
         if (!super.equals(object)) return false;
         Users users = (Users) object;
-        return id == users.id && role_id == users.role_1d && java.util.Objects.equals(firstName, users.firstName) && java.util.Objects.equals(lastName, users.lastName) && java.util.Objects.equals(email, users.email) && java.util.Objects.equals(paswords, users.paswords);
+        return id == users.id && role_id == users.role_id && java.util.Objects.equals(firstName, users.firstName) && java.util.Objects.equals(lastName, users.lastName) && java.util.Objects.equals(email, users.email) && java.util.Objects.equals(paswords, users.paswords);
     }
 
     public int hashCode() {
