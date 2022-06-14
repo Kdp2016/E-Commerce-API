@@ -27,8 +27,8 @@ CREATE TABLE categories (
 
 CREATE TABLE products (
     id int generated always as identity primary key,
-    name varchar not null unique,
-    description text not null,
+    product_name varchar not null unique,
+    product_description text not null,
     product_image varchar not null,
     brand varchar not null,
     price float not null,
@@ -77,7 +77,7 @@ INSERT INTO users (first_name, last_name, email, password, role_id) VALUES ('Dou
 ('Brian', 'Cornell', 'briancornell@gmail.com', 'ilovetarget', 2), 
 ('Jeremy', 'Bushay', 'jeremybushay@gmail.com', 'randompassword', 1);
 INSERT INTO categories (category_name) VALUES ('Electronics'), ('Clothing'), ('Books'), ('Movies'), ('Games'), ('Toys'), ('Home'), ('Sports'), ('Automotive'), ('Tools'), ('Health'), ('Beauty'), ('Garden'), ('Outdoors'), ('Pets'), ('Kids'), ('Food'), ('Fashion'), ('Grocery'), ('Misc');
-INSERT INTO products (name, description, product_image, brand, price, seller_id, category_id) VALUES 
+INSERT INTO products (product_name, product_description, product_image, brand, price, seller_id, category_id) VALUES 
 ('Lenovo Legion 5i 15.6" Laptop', 'Offering a plethora of performance options for any gamer in a clean, minimalist design, the Lenovo Legion 5i pairs latest 10th Generation Intel® Core™ i5 H-Series processors, NVIDIA® GeForce RTX™ graphics, 2933 MHz DDR4 memory, M.2 NVMe PCIe SSD storage all thermally tuned via Legion Cold front 2.0. Enjoy maximum performance via Dual Burn Support, which pushes the CPU and GPU together for improved framerates. Further the Legion 5i combines blindingly fast refresh rates on a 100% color-accurate 1080p display with hair-trigger inputs via the Legion TrueStrike keyboard with soft-landing switches allowing you to scream past competition and rise the ranks.
 
 2.5 GHz Intel Core i5-10500H Six-Core
