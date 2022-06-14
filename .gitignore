@@ -29,3 +29,4 @@ hs_err_pid*
 
 #Sensitive files
 application.properties
+.DS_Store
