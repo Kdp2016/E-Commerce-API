@@ -13,6 +13,7 @@ CREATE TABLE users (
   last_name varchar NOT NULL,
   email varchar unique NOT NULL,
   password varchar NOT NULL check(length(password) >= 7),
+  address varchar not null,
   role_id int default 1,
   
   constraint users_fk
@@ -25,8 +26,31 @@ CREATE TABLE categories (
     category_name varchar not null unique
 );
 
-CREATE TABLE products (
+
+CREATE TABLE status (
     id int generated always as identity primary key,
+    status_name varchar not null unique
+);
+
+
+CREATE TABLE orders (
+    order_id int primary key generated always as identity,
+    user_id int not null,
+    order_date timestamp default current_timestamp,
+    order_status_id int not null default 1,
+    order_total float not null,
+    
+    constraint orders_user_fk
+    foreign key (user_id)
+    references users(id),
+    
+    constraint orders_status_fk
+    foreign key (order_status_id)
+    references status(id)
+   );
+
+CREATE TABLE products (
+    product_id int generated always as identity primary key,
     product_name varchar not null unique,
     product_description text not null,
     product_image varchar not null,
@@ -45,37 +69,18 @@ CREATE TABLE products (
     references categories(id)
 );
 
-CREATE TABLE status (
-    id int generated always as identity primary key,
-    status_name varchar not null unique
+create table order_items (
+order_id int REFERENCES orders (order_id) ON UPDATE CASCADE ON DELETE cascade,
+product_id int REFERENCES products (product_id) ON UPDATE cascade,
+quantity int not null,
+constraint item_products_fk primary key (product_id, order_id)
 );
 
-CREATE TABLE orders (
-    id int generated always as identity primary key,
-    user_id int not null,
-    product_id int not null,
-    address varchar not null,
-    order_date timestamp default current_timestamp,
-    order_status_id int not null default 1,
-    order_total float not null,
-    
-    constraint orders_user_fk
-    foreign key (user_id)
-    references users(id),
-
-    constraint orders_product_fk
-    foreign key (product_id)
-    references products(id),
-
-    constraint orders_status_fk
-    foreign key (order_status_id)
-    references status(id)
-);
 
 INSERT INTO user_roles (role_name) VALUES ('Buyer'), ('Seller'), ('Admin');
-INSERT INTO users (first_name, last_name, email, password, role_id) VALUES ('Doug', 'McMillon', 'dougmcmillion@gmail.com', 'ilovewalmart', 2),
-('Brian', 'Cornell', 'briancornell@gmail.com', 'ilovetarget', 2), 
-('Jeremy', 'Bushay', 'jeremybushay@gmail.com', 'randompass', 1);
+INSERT INTO users (first_name, last_name, email, password, address, role_id) VALUES ('Doug', 'McMillon', 'dougmcmillion@gmail.com', 'ilovewalmart','123 Main St', 2),
+('Brian', 'Cornell', 'briancornell@gmail.com', 'ilovetarget','124 Main St', 2), 
+('Jeremy', 'Bushay', 'jeremybushay@gmail.com', 'randompassword','125 Main St', 1);
 INSERT INTO categories (category_name) VALUES ('Electronics'), ('Clothing'), ('Books'), ('Movies'), ('Games'), ('Toys'), ('Home'), ('Sports'), ('Automotive'), ('Tools'), ('Health'), ('Beauty'), ('Garden'), ('Outdoors'), ('Pets'), ('Kids'), ('Food'), ('Fashion'), ('Grocery'), ('Misc');
 INSERT INTO products (product_name, product_description, product_image, brand, price, seller_id, category_id) VALUES 
 ('Lenovo Legion 5i 15.6" Laptop', 'Offering a plethora of performance options for any gamer in a clean, minimalist design, the Lenovo Legion 5i pairs latest 10th Generation Intel® Core™ i5 H-Series processors, NVIDIA® GeForce RTX™ graphics, 2933 MHz DDR4 memory, M.2 NVMe PCIe SSD storage all thermally tuned via Legion Cold front 2.0. Enjoy maximum performance via Dual Burn Support, which pushes the CPU and GPU together for improved framerates. Further the Legion 5i combines blindingly fast refresh rates on a 100% color-accurate 1080p display with hair-trigger inputs via the Legion TrueStrike keyboard with soft-landing switches allowing you to scream past competition and rise the ranks.
@@ -94,4 +99,5 @@ Layers over anything from dresses to T-shirts for tons of outfit options
 Available in extended sizes — Women''s and Women''s Plus', 'https://target.scene7.com/is/image/Target/GUEST_ba3eaaf2-70a1-4b7f-9c44-ac51e3c5450c?wid=2400&hei=2400&fmt=pjpeg', 'Target', 40.00, 2, 2);
 
 INSERT INTO status (status_name) VALUES ('Ordered'), ('Delivered'), ('Cancelled');
-INSERT INTO orders (user_id, product_id, address, order_status_id, order_total) VALUES (3, 1, '123 Main St', 1, 699.00), (3, 2, '123 Main St', 1, 40.00);
+INSERT INTO orders (user_id, order_status_id, order_total) VALUES (3, 1, 699.00), (3, 1, 40.00);
+insert into order_items (order_id, product_id, quantity) values (2,2,1), (2,1,10), (1, 2, 3), (1, 1, 4);
