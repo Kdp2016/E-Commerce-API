@@ -2,20 +2,20 @@ package com.models;
 
 import java.util.Objects;
 
-public class Products {
+public class Product {
     private int id;
     private String productName;
     private String productDescription;
     private String productImage;
     private String brand;
-    private float price;
+    private double price;
     private int sellerId;
     private int categoryId;
 
-    public Products() {
+    public Product() {
     }
 
-    public Products(int id, String productName, String productDescription, String productImage, String brand, float price, int sellerId, int categoryId) {
+    public Product(int id, String productName, String productDescription, String productImage, String brand, double price, int sellerId, int categoryId) {
         this.id = id;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -66,7 +66,7 @@ public class Products {
         this.brand = brand;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -94,8 +94,8 @@ public class Products {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Products products = (Products) o;
-        return id == products.id && Float.compare(products.price, price) == 0 && sellerId == products.sellerId && categoryId == products.categoryId && Objects.equals(productName, products.productName) && Objects.equals(productDescription, products.productDescription) && Objects.equals(productImage, products.productImage) && Objects.equals(brand, products.brand);
+        Product products = (Product) o;
+        return id == products.id && Double.compare(products.price, price) == 0 && sellerId == products.sellerId && categoryId == products.categoryId && Objects.equals(productName, products.productName) && Objects.equals(productDescription, products.productDescription) && Objects.equals(productImage, products.productImage) && Objects.equals(brand, products.brand);
     }
 
     @Override
