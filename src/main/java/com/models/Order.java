@@ -2,7 +2,7 @@ package com.models;
 
 import java.util.Objects;
 
-public class Orders {
+public class Order {
     private int id;
     private int userId;
     private int productId;
@@ -10,10 +10,10 @@ public class Orders {
     private int orderStatusId;
     private float total;
 
-    public Orders() {
+    public Order() {
     }
 
-    public Orders(int id, int userId, int productId, String address, int orderStatusId, float total) {
+    public Order(int id, int userId, int productId, String address, int orderStatusId, float total) {
         this.id = id;
         this.userId = userId;
         this.productId = productId;
@@ -74,7 +74,7 @@ public class Orders {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Orders orders = (Orders) o;
+        Order orders = (Order) o;
         return id == orders.id && userId == orders.userId && productId == orders.productId && orderStatusId == orders.orderStatusId && Float.compare(orders.total, total) == 0 && Objects.equals(address, orders.address);
     }
 
