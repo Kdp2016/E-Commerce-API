@@ -1,29 +1,39 @@
-package com.models;
+package com.entities;
 
 import java.util.Objects;
 
-public class Product {
+public class Products {
     private int id;
     private String productName;
     private String productDescription;
     private String productImage;
     private String brand;
     private double price;
-    private int sellerId;
-    private int categoryId;
+    private Users seller;
+    private Categories category;
 
-    public Product() {
+    public Products() {
     }
 
-    public Product(int id, String productName, String productDescription, String productImage, String brand, double price, int sellerId, int categoryId) {
+    public Products(int id, String productName, String productDescription, String productImage, String brand, double price, Users seller, Categories category) {
         this.id = id;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productImage = productImage;
         this.brand = brand;
         this.price = price;
-        this.sellerId = sellerId;
-        this.categoryId = categoryId;
+        this.seller = seller;
+        this.category = category;
+    }
+
+    public Products(String productName, String productDescription, String productImage, String brand, double price, Users seller, Categories category) {
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.productImage = productImage;
+        this.brand = brand;
+        this.price = price;
+        this.seller = seller;
+        this.category = category;
     }
 
     public int getId() {
@@ -70,37 +80,37 @@ public class Product {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public int getSellerId() {
-        return sellerId;
+    public Users getSeller() {
+        return seller;
     }
 
-    public void setSellerId(int sellerId) {
-        this.sellerId = sellerId;
+    public void setSeller(Users seller) {
+        this.seller = seller;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public Categories getCategory() {
+        return category;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Categories category) {
+        this.category = category;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Product products = (Product) o;
-        return id == products.id && Double.compare(products.price, price) == 0 && sellerId == products.sellerId && categoryId == products.categoryId && Objects.equals(productName, products.productName) && Objects.equals(productDescription, products.productDescription) && Objects.equals(productImage, products.productImage) && Objects.equals(brand, products.brand);
+        Products products = (Products) o;
+        return id == products.id && Double.compare(products.price, price) == 0 && Objects.equals(productName, products.productName) && Objects.equals(productDescription, products.productDescription) && Objects.equals(productImage, products.productImage) && Objects.equals(brand, products.brand) && Objects.equals(seller, products.seller) && Objects.equals(category, products.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, productName, productDescription, productImage, brand, price, sellerId, categoryId);
+        return Objects.hash(id, productName, productDescription, productImage, brand, price, seller, category);
     }
 
     @Override
@@ -112,8 +122,8 @@ public class Product {
                 ", productImage='" + productImage + '\'' +
                 ", brand='" + brand + '\'' +
                 ", price=" + price +
-                ", sellerId=" + sellerId +
-                ", categoryId=" + categoryId +
+                ", seller=" + seller +
+                ", category=" + category +
                 '}';
     }
 }
