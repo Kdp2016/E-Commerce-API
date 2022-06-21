@@ -1,6 +1,6 @@
 package com.controllers;
 
-import com.models.User;
+import com.entities.Users;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -12,13 +12,13 @@ import java.util.List;
 public class UserController {
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<Users> getAllUsers() {
 
-        List<User> userList = new ArrayList<User>();
-        userList.addAll(Arrays.asList(
-                new User(1, "Goku", "Kakarot", "goku@gmail.com", "someaddres", "goku124", 2),
-                new User(2, "Goku", "Kakarot", "goku@gmail.com", "someaddres", "goku124", 2),
-                new User(3, "Goku", "Kakarot", "goku@gmail.com", "someaddres", "goku124", 2)));
+        List<Users> userList = new ArrayList<Users>();
+//        userList.addAll(Arrays.asList(
+//                new Users(1, "Goku", "Kakarot", "goku@gmail.com", "someaddres", "goku124", 2),
+//                new Users(2, "Goku", "Kakarot", "goku@gmail.com", "someaddres", "goku124", 2),
+//                new Users(3, "Goku", "Kakarot", "goku@gmail.com", "someaddres", "goku124", 2)));
 
         return userList;
     }
