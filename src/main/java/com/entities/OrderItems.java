@@ -3,33 +3,33 @@ package com.entities;
 import java.util.Objects;
 
 public class OrderItems {
-    private Orders orderId;
-    private Products productId;
+    private Orders order;
+    private Products product;
     private int quantity;
 
     public OrderItems() {
     }
 
-    public OrderItems(Orders orderId, Products productId, int quantity) {
-        this.orderId = orderId;
-        this.productId = productId;
+    public OrderItems(Orders order, Products product, int quantity) {
+        this.order = order;
+        this.product = product;
         this.quantity = quantity;
     }
 
-    public Orders getOrderId() {
-        return orderId;
+    public Orders getOrder() {
+        return order;
     }
 
-    public void setOrderId(Orders orderId) {
-        this.orderId = orderId;
+    public void setOrder(Orders order) {
+        this.order = order;
     }
 
-    public Products getProductId() {
-        return productId;
+    public Products getProduct() {
+        return product;
     }
 
-    public void setProductId(Products productId) {
-        this.productId = productId;
+    public void setProduct(Products product) {
+        this.product = product;
     }
 
     public int getQuantity() {
@@ -45,19 +45,19 @@ public class OrderItems {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderItems that = (OrderItems) o;
-        return quantity == that.quantity && Objects.equals(orderId, that.orderId) && Objects.equals(productId, that.productId);
+        return quantity == that.quantity && Objects.equals(order, that.order) && Objects.equals(product, that.product);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderId, productId, quantity);
+        return Objects.hash(order, product, quantity);
     }
 
     @Override
     public String toString() {
         return "OrderItems{" +
-                "orderId=" + orderId +
-                ", productId=" + productId +
+                "order=" + order +
+                ", product=" + product +
                 ", quantity=" + quantity +
                 '}';
     }
