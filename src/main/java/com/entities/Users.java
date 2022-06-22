@@ -9,12 +9,12 @@ public class Users {
     private String email;
     private String address;
     private String password;
-    private UserRoles role;
+    private Role role;
 
     public Users() {
     }
 
-    public Users(String firstName, String lastName, String email, String address, String password, UserRoles role) {
+    public Users(String firstName, String lastName, String email, String address, String password, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -23,7 +23,7 @@ public class Users {
         this.role = role;
     }
 
-    public Users(int id, String firstName, String lastName, String email, String address, String password, UserRoles role) {
+    public Users(int id, String firstName, String lastName, String email, String address, String password, Role role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -81,11 +81,11 @@ public class Users {
         this.password = password;
     }
 
-    public UserRoles getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(UserRoles role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -113,5 +113,9 @@ public class Users {
                 ", password='" + password + '\'' +
                 ", role=" + role +
                 '}';
+    }
+
+    public enum Role {
+        BUYER, SELLER, ADMIN;
     }
 }

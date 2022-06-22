@@ -126,4 +126,8 @@ public class Products {
                 ", category=" + category +
                 '}';
     }
+
+    public enum Categories {
+        ELECTRONICS, CLOTHING, BOOKS, MOVIES, GAMES, TOYS, HOME, SPORTS, AUTOMOTIVE, TOOLS, HEALTH, BEAUTY, GARDEN, OUTDOORS, PETS, KIDS, FOOD, FASHION, GROCERY, MISC
+    }
 }

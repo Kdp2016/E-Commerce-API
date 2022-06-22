@@ -91,5 +91,9 @@ public class Orders {
                 ", total=" + total +
                 '}';
     }
+
+    public enum Status {
+        ORDERED, DELIVERED, CANCELLED;
+    }
 }
 

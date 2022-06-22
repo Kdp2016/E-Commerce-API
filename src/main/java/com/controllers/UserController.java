@@ -15,10 +15,10 @@ public class UserController {
     public List<Users> getAllUsers() {
 
         List<Users> userList = new ArrayList<Users>();
-//        userList.addAll(Arrays.asList(
-//                new Users(1, "Goku", "Kakarot", "goku@gmail.com", "someaddres", "goku124", 2),
-//                new Users(2, "Goku", "Kakarot", "goku@gmail.com", "someaddres", "goku124", 2),
-//                new Users(3, "Goku", "Kakarot", "goku@gmail.com", "someaddres", "goku124", 2)));
+        userList.addAll(Arrays.asList(
+                new Users(1, "Goku", "Kakarot", "goku@gmail.com", "someaddres", "goku124", Users.Role.SELLER),
+                new Users(2, "Goku", "Kakarot", "goku@gmail.com", "someaddres", "goku124", Users.Role.BUYER),
+                new Users(3, "Goku", "Kakarot", "goku@gmail.com", "someaddres", "goku124", Users.Role.ADMIN)));
 
         return userList;
     }
