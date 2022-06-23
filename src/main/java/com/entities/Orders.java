@@ -1,9 +1,16 @@
 package com.entities;
 
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -12,7 +19,7 @@ import java.util.Objects;
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", nullable = false, unique = true)
+    @Column(name = "order_id", nullable = false, unique = true)
     private int id;
     private Users buyer;
     @Column(name = "address", nullable = false)
@@ -20,7 +27,7 @@ public class Orders {
     @JsonManagedReference
     @OneToMany(mappedBy = "pk.orders")
     @Valid
-    private List<orderItems> orderItems;
+    private List<OrderItems> orderItems;
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
@@ -30,7 +37,7 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(int id, Users buyer, String address, List<orderItems> orderItems, Status status, float total) {
+    public Orders(int id, Users buyer, String address, List<OrderItems> orderItems, Status status, float total) {
         this.id = id;
         this.buyer = buyer;
         this.address = address;
@@ -63,11 +70,11 @@ public class Orders {
         this.address = address;
     }
 
-    public List<orderItems> getOrderItems() {
+    public List<OrderItems> getOrderItems() {
         return orderItems;
     }
 
-    public void setOrderItems(List<orderItems> orderItems) {
+    public void setOrderItems(List<OrderItems> orderItems) {
         this.orderItems = orderItems;
     }
 

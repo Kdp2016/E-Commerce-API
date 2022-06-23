@@ -1,35 +1,50 @@
 package com.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.Objects;
 
+@Entity
 public class OrderItems {
-    private Orders order;
-    private Products product;
+    @EmbeddedId
+    @JsonIgnore
+    private OrderItemsPK pk;
+
+    @Column(nullable = false)
     private int quantity;
 
-    public OrderItems() {
-    }
-
-    public OrderItems(Orders order, Products product, int quantity) {
-        this.order = order;
-        this.product = product;
+    public OrderItems(OrderItemsPK pk, int quantity) {
+        this.pk = pk;
         this.quantity = quantity;
     }
 
-    public Orders getOrder() {
-        return order;
+    public OrderItems(Orders order, Products product, int quantity) {
+        pk = new OrderItemsPK();
+        pk.setOrder(order);
+        pk.setProduct(product);
+        this.quantity = quantity;
     }
 
-    public void setOrder(Orders order) {
-        this.order = order;
-    }
-
+    @Transient
     public Products getProduct() {
-        return product;
+        return this.pk.getProduct();
     }
 
-    public void setProduct(Products product) {
-        this.product = product;
+    @Transient
+    public Double getTotalPrice() {
+        return getProduct().getPrice() * getQuantity();
+    }
+
+    public OrderItemsPK getPk() {
+        return pk;
+    }
+
+    public void setPk(OrderItemsPK pk) {
+        this.pk = pk;
     }
 
     public int getQuantity() {
@@ -44,22 +59,20 @@ public class OrderItems {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderItems that = (OrderItems) o;
-        return quantity == that.quantity && Objects.equals(order, that.order) && Objects.equals(product, that.product);
+        OrderItems orderItem = (OrderItems) o;
+        return quantity == orderItem.quantity && Objects.equals(pk, orderItem.pk);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(order, product, quantity);
+        return Objects.hash(pk, quantity);
     }
 
     @Override
     public String toString() {
-        return "OrderItems{" +
-                "order=" + order +
-                ", product=" + product +
+        return "OrderItem{" +
+                "pk=" + pk +
                 ", quantity=" + quantity +
                 '}';
     }
 }
-
