@@ -21,7 +21,10 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id", nullable = false, unique = true)
     private int id;
+    @ManyToOne
+    @JoinColumn(name = "customer", nullable = false)
     private Users buyer;
+
     @Column(name = "address", nullable = false)
     private String address;
     @JsonManagedReference
@@ -32,12 +35,12 @@ public class Orders {
     @Column(name = "status")
     private Status status;
     @Column(name = "total", nullable = false)
-    private float total;
+    private double total;
 
     public Orders() {
     }
 
-    public Orders(int id, Users buyer, String address, List<OrderItems> orderItems, Status status, float total) {
+    public Orders(int id, Users buyer, String address, List<OrderItems> orderItems, Status status, double total) {
         this.id = id;
         this.buyer = buyer;
         this.address = address;
@@ -86,7 +89,7 @@ public class Orders {
         this.status = status;
     }
 
-    public float getTotal() {
+    public double getTotal() {
         return total;
     }
 
@@ -99,7 +102,7 @@ public class Orders {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Orders orders = (Orders) o;
-        return id == orders.id && Float.compare(orders.total, total) == 0 && Objects.equals(buyer, orders.buyer) && Objects.equals(address, orders.address) && Objects.equals(orderItems, orders.orderItems) && status == orders.status;
+        return id == orders.id && Double.compare(orders.total, total) == 0 && Objects.equals(buyer, orders.buyer) && Objects.equals(address, orders.address) && Objects.equals(orderItems, orders.orderItems) && status == orders.status;
     }
 
     @Override

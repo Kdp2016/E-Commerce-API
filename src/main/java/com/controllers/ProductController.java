@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-    Users user = new Users(1, "Goku", "Kakarot", "goku@gmail.com", "123 main st", "password123", Users.Role.SELLER);
+    Users user = new Users(1, "Goku", "Kakarot", "goku@gmail.com", "password123", Users.Role.SELLER);
 
     @GetMapping(produces = "application/json")
     public List<Products> products() {

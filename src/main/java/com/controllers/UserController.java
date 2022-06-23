@@ -16,9 +16,9 @@ public class UserController {
 
         List<Users> userList = new ArrayList<Users>();
         userList.addAll(Arrays.asList(
-                new Users(1, "Goku", "Kakarot", "goku@gmail.com", "someaddres", "goku124", Users.Role.SELLER),
-                new Users(2, "Goku", "Kakarot", "goku@gmail.com", "someaddres", "goku124", Users.Role.BUYER),
-                new Users(3, "Goku", "Kakarot", "goku@gmail.com", "someaddres", "goku124", Users.Role.ADMIN)));
+                new Users(1, "Goku", "Kakarot", "goku@gmail.com", "goku124", Users.Role.SELLER),
+                new Users(2, "Goku", "Kakarot", "goku@gmail.com", "goku124", Users.Role.BUYER),
+                new Users(3, "Goku", "Kakarot", "goku@gmail.com", "goku124", Users.Role.ADMIN)));
 
         return userList;
     }
