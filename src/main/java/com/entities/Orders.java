@@ -1,8 +1,10 @@
 package com.entities;
 
+import javax.persistence.Entity;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class Orders {
     private int id;
     private Users buyer;
