@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Products {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", nullable = false, unique = true)
+    @Column(name = "product_id", nullable = false, unique = true)
     private int id;
     @Column(name = "product_name", nullable = false)
     private String productName;

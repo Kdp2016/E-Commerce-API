@@ -1,9 +1,11 @@
 package com.product;
 
+import com.common.utils.ResourceCreationResponse;
+import com.product.dtos.NewProductRequest;
+import com.product.dtos.ProductResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +20,23 @@ public class ProductController {
     }
 
     @GetMapping(produces = "application/json")
-    public List<Products> getAllProducts() {
-        return null;
+    public List<ProductResponse> getAllProducts() {
+        return productService.getAllProducts();
+    }
+
+    @GetMapping("/id/{productId}")
+    public ProductResponse getUserById(@PathVariable int productId) throws Exception {
+        return productService.getUserById(productId);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    public ResourceCreationResponse postNewUser(@RequestBody NewProductRequest newProduct) {
+        return productService.createProduct(newProduct);
+    }
+    
+    @PostMapping("/delete/{productId}")
+    public void deleteProductById(@PathVariable int productId) {
+        productService.deleteProductById(productId);
     }
 }
