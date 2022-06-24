@@ -31,7 +31,7 @@ public class NewUserRequest {
 
     @NotNull
     private Users.Role role;
-
+    
     public Users extractResource() {
         return new Users(firstName, lastName, email, password, role);
     }
@@ -42,7 +42,6 @@ public class NewUserRequest {
                 "email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }
