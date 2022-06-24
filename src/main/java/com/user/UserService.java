@@ -1,5 +1,6 @@
 package com.user;
 
+import com.common.utils.ResourceCreationResponse;
 import com.user.dtos.NewUserRequest;
 import com.user.dtos.UserResponse;
 import org.apache.catalina.User;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -37,23 +39,27 @@ public class UserService {
                 .orElseThrow(Exception::new);
     }
 
-    public ResourceCreationResponse createUser(@Valid NewUserRequest newUserRequest) {
-        User newUser = newUserRequest.extractResource();
+    public ResourceCreationResponse createUser(@Valid NewUserRequest newUserRequest) throws SQLException {
+        Users newUser = newUserRequest.extractResource();
 
         if (userRepo.existsByEmail(newUser.getEmail())) {
-            throw new ResourcePersistenceException("There is already a user with that email address!");
+            throw new SQLException("There is already a user with that email address!");
         }
 
-        newUser.setId(UUID.randomUUID().toString());
-        newUser.setPassword();
+        userRepo.save(newUser);
 
         return new ResourceCreationResponse(newUser.getId());
     }
 
-    public UserResponse authenticateUserCredentials(@Valid AuthRequest authRequest) {
-        return userRepo.findUserByEmailAndPassword(authRequest.getUsername(), authRequest.getPassword())
-                .map(UserResponse::new)
-                .orElseThrow(AuthenticationException::new);
+    public void deleteUserById(int id) {
+        userRepo.deleteById(id);
+
     }
+
+//    public UserResponse authenticateUserCredentials(@Valid AuthRequest authRequest) {
+//        return userRepo.findUserByEmailAndPassword(authRequest.getUsername(), authRequest.getPassword())
+//                .map(UserResponse::new)
+//                .orElseThrow(AuthenticationException::new);
+//    }
 }
 

@@ -10,6 +10,7 @@ import sun.security.util.Password;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Data
@@ -25,7 +26,7 @@ public class NewUserRequest {
     @NotNull
     private String lastName;
 
-    @Size(min = 8)
+    @Pattern(regexp = "\"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$\"")
     private String password;
 
     @NotNull
