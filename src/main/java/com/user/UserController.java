@@ -1,6 +1,5 @@
-package com.controllers;
+package com.user;
 
-import com.entities.Users;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

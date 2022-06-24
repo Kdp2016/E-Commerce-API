@@ -1,7 +1,8 @@
-package com.entities;
+package com.order;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.user.Users;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -21,13 +22,17 @@ public class Orders {
     @Column(name = "order_id", nullable = false, unique = true)
     private int id;
     @ManyToOne
+<<<<<<< HEAD:src/main/java/com/entities/Orders.java
     @JoinColumn(name = "customer", nullable = false)
+=======
+    @JoinColumn(name = "customer_id", nullable = false)
+>>>>>>> bd914086ec7202a30fa75914723427c3b97e81f1:src/main/java/com/order/Orders.java
     private Users buyer;
 
     @Column(name = "address", nullable = false)
     private String address;
     @JsonManagedReference
-    @OneToMany(mappedBy = "pk.orders")
+    @OneToMany(mappedBy = "pk.order")
     @Valid
     private List<OrderItems> orderItems;
     @Enumerated(EnumType.STRING)

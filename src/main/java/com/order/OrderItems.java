@@ -1,14 +1,13 @@
-package com.entities;
+package com.order;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.product.Products;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "orderItems")
 public class OrderItems {
     @EmbeddedId
     @JsonIgnore
