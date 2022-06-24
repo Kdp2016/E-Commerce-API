@@ -1,15 +1,32 @@
-package com.entities;
+package com.product;
 
+import com.user.Users;
+
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "products")
 public class Products {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id", nullable = false, unique = true)
     private int id;
+    @Column(name = "product_name", nullable = false)
     private String productName;
+    @Column(name = "product_description", nullable = false, columnDefinition = "text")
     private String productDescription;
+    @Column(name = "product_image", nullable = false, columnDefinition = "text")
     private String productImage;
+    @Column(name = "brand", nullable = false)
     private String brand;
+    @Column(name = "price", nullable = false)
     private double price;
+    @ManyToOne
+    @JoinColumn(name = "seller_id", nullable = false)
     private Users seller;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "category")
     private Categories category;
 
     public Products() {

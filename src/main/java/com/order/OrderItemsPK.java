@@ -1,6 +1,7 @@
-package com.entities;
+package com.order;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.product.Products;
 
 import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
