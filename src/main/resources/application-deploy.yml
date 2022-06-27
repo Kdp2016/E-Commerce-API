@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://e-commerce.cnbsoa6oldjx.us-east-1.rds.amazonaws.com:5432/postgres?currentSchema=ecommerce
+    username: postgres
+    password: revature
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
