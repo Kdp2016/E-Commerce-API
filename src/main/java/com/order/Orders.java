@@ -48,6 +48,15 @@ public class Orders {
         this.total = total;
     }
 
+//    public Orders(Users buyer, String address, List<OrderItems> orderItems, Status status, float total) {
+        public Orders(Users buyer, String address, Status status, float total) {
+        this.buyer = buyer;
+        this.address = address;
+//        this.orderItems = orderItems;
+        this.status = status;
+        this.total = total;
+    }
+
     public int getId() {
         return id;
     }

@@ -1,27 +1,31 @@
 package com.order.dto;
 
+import com.order.Orders;
+import com.user.Users;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 public class OrderResponse {
 
-    private String id;
-    private String firstName;
-    private String lastName;
-    private String username;
-    private String role;
+    private int id;
+    private Users buyer;
+    private String address;
+//    private List<OrderItems> orderItems;
+    private Orders.Status status;
+    private float total;
 
-    private List<OrderResponse> createdOrder;
 
-    public UserResponse(Order order) {
+    public OrderResponse(Orders order) {
         this.id = order.getId();
-        this.firstName = order.getFirstName();
-        this.lastName = order.getLastName();
-        this.username = order.getUsername();
-        this.role = order.getRole().toString();
-        this.createdTasks = order.getCreatedTasks().stream().map(TaskResponse::new).collect(Collectors.toList());
+        this.buyer = order.getBuyer();
+        this.address = order.getAddress();
+//        this.orderItems = order.getOrderItems();
+        this.status = order.getStatus();
+        this.total = order.getTotal();
     }
 
 }

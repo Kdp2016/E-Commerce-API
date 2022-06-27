@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import sun.security.util.Password;
+//import sun.security.util.Password;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
