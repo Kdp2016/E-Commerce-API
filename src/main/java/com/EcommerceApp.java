@@ -1,5 +1,7 @@
 package com;
 
+import com.order.OrderRepository;
+import com.order.Orders;
 import com.product.Products;
 import com.user.Users;
 import com.product.ProductRepository;
@@ -18,11 +20,13 @@ public class EcommerceApp implements CommandLineRunner {
 
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
+    private final OrderRepository orderRepository;
 
     @Autowired
-    public EcommerceApp(ProductRepository productRepository, UserRepository userRepository) {
+    public EcommerceApp(ProductRepository productRepository, UserRepository userRepository, OrderRepository orderRepository) {
         this.productRepository = productRepository;
         this.userRepository = userRepository;
+        this.orderRepository = orderRepository;
     }
 
     public static void main(String[] args) {
@@ -45,9 +49,15 @@ public class EcommerceApp implements CommandLineRunner {
                         "and floral hypoallergenic fragrance. Get all the effectiveness you’d look for in exfoliators or a shower scrub, but with the nourishment and care that your skin needs in the shower. To use, scoop a generous amount of Dove Macadamia and Rice Milk Exfoliating Body Scrub out of the jar. Massage all over your body in circular motions for creamy coverage, and then rinse away to reveal silky smooth skin. Use 3-4 times per week as part of your skin care regimen, followed by Dove Body Wash or Beauty Bar for touchably soft skin. Try Dove Body Polish to get beach-ready skin, prep skin for tanning, or to help exfoliate " +
                         "before shaving to help prevent ingrown hairs. You'll love the feeling of silky smooth skin all over. Plus, when you buy Dove, you can be assured you’re caring for your skin with products that are PETA Cruelty-Free certified. Company-wide, we’re also on a mission to help the next generation of women develop a positive relationship with the way they look—reaching over ¼ of a billion young people with self-esteem education by 2030. We’re also committed to substantially reducing plastic waste by 2025. This includes reducing our use of virgin plastic by 20,500 metric tons annually, launching new 100% recycled " +
                         "plastic bottles and trialing new refillable formats for certain select products.", "https://i5.walmartimages.com/asr/72cd6b24-3c70-4387-80cd-09fb68e1de3c.4172db0c319d85648550a83a92367bed.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF", "Dove", 6.97, user, Products.Categories.BEAUTY)));
+
+        //Breaks if we try this..
+//        Orders order = new Orders(user,"123 Main st",Orders.Status.ORDERED,123);
+
         userRepository.save(user);
         System.out.println(userRepository.findAll());
         productRepository.saveAll(productList);
         System.out.println(productRepository.findAll());
+//        orderRepository.save(order);
+        System.out.println(orderRepository.findAll());
     }
 }
