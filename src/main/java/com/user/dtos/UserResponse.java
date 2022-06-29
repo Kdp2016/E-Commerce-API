@@ -22,4 +22,12 @@ public class UserResponse {
         this.email = user.getEmail();
         this.role = user.getRole();
     }
+
+    public UserResponse(UserResponse authUser) {
+        this.id = authUser.getId();
+        this.firstName = authUser.getFirstName();
+        this.lastName = authUser.getLastName();
+        this.email = authUser.getEmail();
+        this.role = authUser.getRole();
+    }
 }

@@ -26,9 +26,9 @@ public class AuthController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public Principal authenticate(@RequestBody AuthRequest authRequest, HttpServletResponse resp) {
+    public UserResponse authenticate(@RequestBody AuthRequest authRequest, HttpServletResponse resp) {
         UserResponse authUser = userService.authenticateUserCredentials(authRequest);
-        Principal payload = new Principal(authUser);
+        UserResponse payload = new UserResponse(authUser);
         String token = tokenService.generateToken(payload);
         resp.setHeader("Authorization", token);
         return payload;
