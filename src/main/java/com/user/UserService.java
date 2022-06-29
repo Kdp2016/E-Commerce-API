@@ -1,6 +1,7 @@
 package com.user;
 
 import com.common.utils.ResourceCreationResponse;
+import com.common.utils.exceptions.ResourcePersistenceException;
 import com.user.dtos.NewUserRequest;
 import com.user.dtos.UserResponse;
 import org.apache.catalina.User;
@@ -43,9 +44,9 @@ public class UserService {
         Users newUser = newUserRequest.extractResource();
 
         if (userRepo.existsByEmail(newUser.getEmail())) {
-            throw new SQLException("There is already a user with that email address!");
+            throw new ResourcePersistenceException("There is already a user with that email address!");
         }
-
+        newUser.setRole(Users.Role.BUYER);
         userRepo.save(newUser);
 
         return new ResourceCreationResponse(newUser.getId());
