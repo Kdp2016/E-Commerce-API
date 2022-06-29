@@ -41,17 +41,17 @@ public class ErrorResponseAspect {
         return new ErrorResponse(409, Collections.singletonList(e.getMessage()));
     }
 
-//    @ExceptionHandler
-//    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-//    public ErrorResponse handleAuthenticationException(AuthenticationException e) {
-//        return new ErrorResponse(401, Collections.singletonList(e.getMessage()));
-//    }
-//
-//    @ExceptionHandler
-//    @ResponseStatus(HttpStatus.FORBIDDEN)
-//    public ErrorResponse handleAuthorizationException(AuthorizationException e) {
-//        return new ErrorResponse(403, Collections.singletonList(e.getMessage()));
-//    }
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ErrorResponse handleAuthenticationException(AuthenticationExceptions e) {
+        return new ErrorResponse(401, Collections.singletonList(e.getMessage()));
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErrorResponse handleAuthorizationException(AuthorizationExceptions e) {
+        return new ErrorResponse(403, Collections.singletonList(e.getMessage()));
+    }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
