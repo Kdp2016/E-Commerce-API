@@ -2,6 +2,12 @@ package com.auth;
 
 
 import com.auth.DTOS.Principal;
+import com.common.utils.exceptions.MissingAuthTokenExceptions;
+import com.common.utils.exceptions.TokenParseExceptions;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -33,7 +39,7 @@ public class TokenService {
     public Principal extractTokenDetails(String token) {
 
         if (token == null || token.isEmpty()) {
-            throw new ();
+            throw new MissingAuthTokenExceptions();
         }
 
         try {
@@ -44,9 +50,9 @@ public class TokenService {
 
             return new Principal(claims.getId(), claims.get("role", String.class));
         } catch (ExpiredJwtException e) {
-            throw new TokenParseException("The provided token is expired", e);
+            throw new TokenParseExceptions("The provided token is expired", e);
         } catch (Exception e) {
-            throw new TokenParseException(e);
+            throw new TokenParseExceptions(e);
         }
     }
 

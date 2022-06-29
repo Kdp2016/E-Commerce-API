@@ -1,7 +1,8 @@
 package com.auth;
 
 
-import com.sun.org.apache.xml.internal.security.algorithms.SignatureAlgorithm;
+
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
