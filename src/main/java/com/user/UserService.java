@@ -1,5 +1,6 @@
 package com.user;
 
+import com.auth.DTOS.AuthRequest;
 import com.common.utils.ResourceCreationResponse;
 import com.user.dtos.NewUserRequest;
 import com.user.dtos.UserResponse;
@@ -55,6 +56,8 @@ public class UserService {
         userRepo.deleteById(id);
 
     }
+
+
 
 //    public UserResponse authenticateUserCredentials(@Valid AuthRequest authRequest) {
 //        return userRepo.findUserByEmailAndPassword(authRequest.getUsername(), authRequest.getPassword())
