@@ -1,6 +1,8 @@
 package com.user;
 
+import com.auth.DTOS.AuthRequest;
 import com.common.utils.ResourceCreationResponse;
+import com.common.utils.exceptions.AuthenticationExceptions;
 import com.common.utils.exceptions.ResourcePersistenceException;
 import com.user.dtos.NewUserRequest;
 import com.user.dtos.UserResponse;
@@ -57,10 +59,12 @@ public class UserService {
 
     }
 
-//    public UserResponse authenticateUserCredentials(@Valid AuthRequest authRequest) {
-//        return userRepo.findUserByEmailAndPassword(authRequest.getUsername(), authRequest.getPassword())
-//                .map(UserResponse::new)
-//                .orElseThrow(AuthenticationException::new);
-//    }
+
+
+    public UserResponse authenticateUserCredentials(@Valid AuthRequest authRequest) {
+        return userRepo.findUserByEmailAndPassword(authRequest.getEmail(), authRequest.getPassword())
+                .map(UserResponse::new)
+                .orElseThrow(AuthenticationExceptions::new);
+    }
 }
 

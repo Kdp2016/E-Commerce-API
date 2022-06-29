@@ -3,11 +3,14 @@ package com.user;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.Option;
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends JpaRepository<Users, Integer> {
 
 
     boolean existsByEmail(String email);
 
-    Users findUserByEmailAndPassword(String email, String password);
+    Optional<Users> findUserByEmailAndPassword(String email, String password);
 }

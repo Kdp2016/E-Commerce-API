@@ -8,3 +8,5 @@ spring:
     name: e-commerce-api
   profiles:
     default: local
+jwt:
+  secret: revature
