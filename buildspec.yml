@@ -6,15 +6,14 @@ phases:
       java: corretto8
   pre_build:
     commands:
-      - echo "IN PRE_BUILD PHASE"
+      - aws s3 cp s3://e-commerce-resources/application-deploy.yml ./src/main/resources
   build:
     commands:
-      - echo "IN BUILD PHASE"
       - mvn clean package
   post_build:
     commands:
-      - echo "IN POST_BUILD PHASE"
       - mv target/*.jar ./ecommerce.jar
+
 artifacts:
   files:
-    -ecommerce.jar
+    - ecommerce.jar
