@@ -3,6 +3,8 @@ package com.product;
 import com.common.utils.ResourceCreationResponse;
 import com.product.dtos.NewProductRequest;
 import com.product.dtos.ProductResponse;
+import com.product.dtos.UpdateProductRequest;
+import com.user.dtos.UpdateUserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -39,4 +41,11 @@ public class ProductController {
     public void deleteProductById(@PathVariable int productId) {
         productService.deleteProductById(productId);
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping(consumes = "application/json")
+    public void updateProductInfo(@RequestBody UpdateProductRequest updateProductInfo) {
+        productService.updateProduct(updateProductInfo);
+    }
+
 }
