@@ -16,7 +16,7 @@ public class ValidatorMessageUtil {
     public static final String FNAME_REQUIREMENTS = "At least one character must be provided for a first name";
     public static final String LNAME_REQUIREMENTS = "At least one character must be provided for a last name";
     public static final String EMAIL_REQUIREMENTS = "A valid email must be provided";
-    public static final String PASSWORD_REQUIREMENTS = "Passwords must be seven characters long";
+    public static final String PASSWORD_REQUIREMENTS = "Passwords must be eight characters long";
 
     public static final String EMAIL_REQUIRED = "A non-null email address is required for this operation";
 }

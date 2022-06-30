@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class NewUserRequest {
 
+
     @Email
     private String email;
 

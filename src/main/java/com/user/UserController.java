@@ -2,6 +2,7 @@ package com.user;
 
 import com.common.utils.ResourceCreationResponse;
 import com.user.dtos.NewUserRequest;
+import com.user.dtos.UpdateUserRequest;
 import com.user.dtos.UserResponse;
 import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,6 @@ public class UserController {
 
     @GetMapping(produces = "application/json")
     public List<UserResponse> getAllUsers() {
-//        Principal requester = tokenService.extractTokenDetails(token)
-//                .orElseThrow(() -> new AuthenticationException("No auth token found on request!"));
-
-//        if (!requester.getAuthUserRole().equals("ADMIN")) {
-//            throw new AuthorizationException("You are not allowed to hit this endpoint based on your role!");
-//        }
 
         return userService.fetchAllUsers();
     }
@@ -46,6 +41,12 @@ public class UserController {
     @PostMapping(consumes = "application/json", produces = "application/json")
     public ResourceCreationResponse postNewUser(@RequestBody NewUserRequest newUser) throws SQLException {
         return userService.createUser(newUser);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping(consumes = "application/json")
+    public void updateUserInfo(@RequestBody UpdateUserRequest updatedUserInfo) {
+        userService.updateUser(updatedUserInfo);
     }
 
     @PostMapping("/delete/{userId}")
