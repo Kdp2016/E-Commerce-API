@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto8
+  pre_build:
+    commands:
+      - echo "IN PRE_BUILD PHASE"
+  build:
+    commands:
+      - echo "IN BUILD PHASE"
+      - mvn clean package
+  post_build:
+    commands:
+      - echo "IN POST_BUILD PHASE"
+      - mv target/*.jar ./ecommerce.jar
+artifacts:
+  files:
+    -ecommerce.jar
