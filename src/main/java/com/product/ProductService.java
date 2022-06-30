@@ -1,8 +1,11 @@
 package com.product;
 
 import com.common.utils.ResourceCreationResponse;
+import com.common.utils.exceptions.ResourceNotFoundException;
 import com.product.dtos.NewProductRequest;
 import com.product.dtos.ProductResponse;
+import com.product.dtos.UpdateProductRequest;
+import com.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +46,35 @@ public class ProductService {
     public void deleteProductById(int id) {
         productRepository.deleteById(id);
 
+    }
+
+    public void updateProduct (@Valid UpdateProductRequest updateProductRequest) {
+
+        Products updatedProduct = updateProductRequest.extractResource();
+        Products productForUpdate = productRepository.findById(updatedProduct.getId()).orElseThrow(ResourceNotFoundException::new);
+
+        if (updatedProduct.getBrand() != null) {
+            productForUpdate.setBrand(updatedProduct.getBrand());
+        }
+        if (updatedProduct.getCategory() != null) {
+            productForUpdate.setCategory(updatedProduct.getCategory());
+        }
+
+        if (updatedProduct.getPrice() != 0) {
+            productForUpdate.setPrice(updatedProduct.getPrice());
+        }
+
+        if (updatedProduct.getProductDescription() != null) {
+            productForUpdate.setProductDescription(updatedProduct.getProductDescription());
+        }
+
+        if (updatedProduct.getProductImage() != null) {
+            productForUpdate.setProductImage(updatedProduct.getProductImage());
+        }
+
+        if (updatedProduct.getProductName() != null) {
+            productForUpdate.setProductName(updatedProduct.getProductName());
+        }
+        productRepository.save(productForUpdate);
     }
 }
