@@ -24,6 +24,7 @@ public class Users {
     private Role role;
 
     public Users() {
+        super();
     }
 
     public Users(String firstName, String lastName, String email, String password, Role role) {

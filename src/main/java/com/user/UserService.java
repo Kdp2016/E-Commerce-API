@@ -3,13 +3,16 @@ package com.user;
 import com.auth.DTOS.AuthRequest;
 import com.common.utils.ResourceCreationResponse;
 import com.common.utils.exceptions.AuthenticationExceptions;
+import com.common.utils.exceptions.ResourceNotFoundException;
 import com.common.utils.exceptions.ResourcePersistenceException;
 import com.user.dtos.NewUserRequest;
+import com.user.dtos.UpdateUserRequest;
 import com.user.dtos.UserResponse;
 import org.apache.catalina.User;
 import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -57,6 +60,40 @@ public class UserService {
     public void deleteUserById(int id) {
         userRepo.deleteById(id);
 
+    }
+
+
+    public void updateUser(@Valid UpdateUserRequest updatedUserRequest) {
+
+        Users updatedUser = updatedUserRequest.extractResource();
+        Users userForUpdate = userRepo.findById(updatedUser.getId()).orElseThrow(ResourceNotFoundException::new);
+
+        if (updatedUser.getFirstName() != null) {
+            userForUpdate.setFirstName(updatedUser.getFirstName());
+        }
+
+        if (updatedUser.getLastName() != null) {
+            userForUpdate.setLastName(updatedUser.getLastName());
+        }
+
+        if (updatedUser.getEmail() != null) {
+            if (userRepo.existsByEmail(updatedUser.getEmail())) {
+                throw new ResourcePersistenceException("There is already a user with that email!");
+            }
+            userForUpdate.setEmail(updatedUser.getEmail());
+        }
+
+
+        if (updatedUser.getPassword() != null) {
+            userForUpdate.setPassword(updatedUser.getPassword());
+        }
+
+        if (updatedUser.getRole() != null) {
+            userForUpdate.setRole(updatedUser.getRole());
+        }
+
+        System.out.println(userForUpdate);
+        userRepo.save(userForUpdate);
     }
 
 
