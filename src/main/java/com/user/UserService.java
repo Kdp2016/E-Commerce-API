@@ -8,17 +8,13 @@ import com.common.utils.exceptions.ResourcePersistenceException;
 import com.user.dtos.NewUserRequest;
 import com.user.dtos.UpdateUserRequest;
 import com.user.dtos.UserResponse;
-import org.apache.catalina.User;
-import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -92,8 +88,7 @@ public class UserService {
             userForUpdate.setRole(updatedUser.getRole());
         }
 
-        System.out.println(userForUpdate);
-        userRepo.save(userForUpdate);
+
     }
 
 

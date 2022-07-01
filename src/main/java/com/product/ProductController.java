@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/products")
@@ -33,6 +34,11 @@ public class ProductController {
     @PostMapping(consumes = "application/json", produces = "application/json")
     public ResourceCreationResponse postNewUser(@RequestBody NewProductRequest newProduct) {
         return productService.createProduct(newProduct);
+    }
+
+    @GetMapping("/search")
+    public List<ProductResponse> findBy(@RequestParam Map<String, String> params) {
+        return productService.search(params);
     }
     
     @PostMapping("/delete/{productId}")
