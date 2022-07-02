@@ -32,9 +32,12 @@ public class NewUserRequest {
 
     @NotNull
     private Users.Role role;
+
+    @NotNull
+    private boolean isActive;
     
     public Users extractResource() {
-        return new Users(firstName, lastName, email, password, role);
+        return new Users(firstName, lastName, email, password, role, isActive);
     }
 
     @Override
@@ -43,7 +46,10 @@ public class NewUserRequest {
                 "email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", role='" + role + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", isActive=" + isActive +
                 '}';
     }
+
 }

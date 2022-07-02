@@ -52,13 +52,23 @@ public class UserService {
             throw new ResourcePersistenceException("There is already a user with that email address!");
         }
         newUser.setRole(Users.Role.BUYER);
+        newUser.setActive(true);
         userRepo.save(newUser);
 
         return new ResourceCreationResponse(newUser.getId());
     }
 
-    public void deleteUserById(int id) {
-        userRepo.deleteById(id);
+
+    public void activateUser(int id) {
+        userRepo.findById(id)
+                .orElseThrow(ResourceNotFoundException::new)
+                .setActive(true);
+    }
+
+    public void deactivateUser(int id) {
+        userRepo.findById(id)
+                .orElseThrow(ResourceNotFoundException::new)
+                .setActive(false);
 
     }
 
@@ -97,11 +107,12 @@ public class UserService {
     }
 
 
-
     public UserResponse authenticateUserCredentials(@Valid AuthRequest authRequest) {
         return userRepo.findUserByEmailAndPassword(authRequest.getEmail(), authRequest.getPassword())
                 .map(UserResponse::new)
                 .orElseThrow(AuthenticationExceptions::new);
     }
+
+
 }
 

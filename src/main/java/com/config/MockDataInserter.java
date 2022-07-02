@@ -33,7 +33,10 @@ public class MockDataInserter implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        Users user = new Users("Goku", "Kakarot", "goku@gmail.com", "password123", Users.Role.SELLER);
+        Users user = new Users("Goku", "Kakarot", "goku@gmail.com", "password123", Users.Role.SELLER, true);
+        Users user1 = new Users("Gohan", "Kakarot", "gohan@gmail.com", "password123", Users.Role.ADMIN, true);
+        Users user2 = new Users("Vegeta", "Saiyan", "vegeta@gmail.com", "password123", Users.Role.BUYER, true);
+        Users user3 = new Users("Trunks", "Saiyan", "trunks@gmail.com", "password123", Users.Role.BUYER, true);
 
         List<Products> productList = new ArrayList<Products>();
         productList.addAll(Arrays.asList(
@@ -51,6 +54,8 @@ public class MockDataInserter implements CommandLineRunner {
         Orders order = new Orders(user,"123 street", Orders.Status.ORDERED, 123);
 
         userRepo.save(user);
+        userRepo.save(user1);
+        userRepo.save(user2);
         System.out.println(userRepo.findAll());
         productRepo.saveAll(productList);
         System.out.println(productRepo.findAll());
