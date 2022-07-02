@@ -13,6 +13,7 @@ public class UserResponse {
     private String lastName;
     private String email;
     private Users.Role role;
+    private boolean isActive;
 
 
     public UserResponse(Users user) {
@@ -21,6 +22,7 @@ public class UserResponse {
         this.lastName = user.getLastName();
         this.email = user.getEmail();
         this.role = user.getRole();
+        this.isActive = user.isActive();
     }
 
     public UserResponse(UserResponse authUser) {
@@ -29,5 +31,6 @@ public class UserResponse {
         this.lastName = authUser.getLastName();
         this.email = authUser.getEmail();
         this.role = authUser.getRole();
+        this.isActive = authUser.isActive;
     }
 }

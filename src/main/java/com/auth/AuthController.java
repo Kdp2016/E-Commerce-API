@@ -3,6 +3,7 @@ package com.auth;
 
 import com.auth.DTOS.AuthRequest;
 import com.auth.DTOS.Principal;
+import com.common.utils.exceptions.AuthenticationExceptions;
 import com.user.UserService;
 import com.user.dtos.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,10 @@ public class AuthController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public UserResponse authenticate(@RequestBody AuthRequest authRequest, HttpServletResponse resp) {
+    public UserResponse authenticate(@RequestBody AuthRequest authRequest, HttpServletResponse resp) throws Exception {
         UserResponse authUser = userService.authenticateUserCredentials(authRequest);
+        if (authUser.isActive() == false){throw new AuthenticationExceptions("Not an active user account, please contact support!");
+        }
         UserResponse payload = new UserResponse(authUser);
         String token = tokenService.generateToken(payload);
         resp.setHeader("Authorization", token);

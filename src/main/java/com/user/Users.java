@@ -22,26 +22,30 @@ public class Users {
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
+    @Column(name = "isActive", nullable = false)
+    private boolean isActive;
 
     public Users() {
         super();
     }
 
-    public Users(String firstName, String lastName, String email, String password, Role role) {
+    public Users(String firstName, String lastName, String email, String password, Role role, boolean isActive) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.isActive = isActive;
     }
 
-    public Users(int id, String firstName, String lastName, String email, String password, Role role) {
+    public Users(int id, String firstName, String lastName, String email, String password, Role role, boolean isActive) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.isActive = isActive;
     }
 
     public int getId() {
@@ -92,22 +96,27 @@ public class Users {
         this.role = role;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Users users = (Users) o;
-        return id == users.id && Objects.equals(firstName, users.firstName) && Objects.equals(lastName, users.lastName)
-                && Objects.equals(email, users.email) && Objects.equals(password, users.password)
-                && Objects.equals(role, users.role);
+        return id == users.id && isActive == users.isActive && Objects.equals(firstName, users.firstName) && Objects.equals(lastName, users.lastName) && Objects.equals(email, users.email) && Objects.equals(password, users.password) && role == users.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, password, role);
+        return Objects.hash(id, firstName, lastName, email, password, role, isActive);
     }
+
 
     @Override
     public String toString() {
@@ -118,6 +127,7 @@ public class Users {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
+                ", isActive=" + isActive +
                 '}';
     }
 

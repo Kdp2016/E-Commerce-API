@@ -1,6 +1,7 @@
 package com.user;
 
 import com.common.utils.ResourceCreationResponse;
+import com.common.utils.web.security.Secured;
 import com.user.dtos.NewUserRequest;
 import com.user.dtos.UpdateUserRequest;
 import com.user.dtos.UserResponse;
@@ -49,8 +50,18 @@ public class UserController {
         userService.updateUser(updatedUserInfo);
     }
 
-    @PostMapping("/delete/{userId}")
-    public void deleteUserById(@PathVariable int userId) {
-        userService.deleteUserById(userId);
+
+    @PatchMapping("/activation/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    //    @Secured(allowedRoles = {"ADMIN"})
+    public void activateUser(@RequestParam int id) {
+        userService.activateUser(id);
+    }
+
+    @DeleteMapping("/delete/")
+//    @Secured(allowedRoles = {"ADMIN"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deactivateUser(@RequestParam int id) {
+        userService.deactivateUser(id);
     }
 }

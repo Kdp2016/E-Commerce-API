@@ -5,11 +5,13 @@ public class ResourcePersistenceException extends RuntimeException{
         super(message);
     }
 
+    public ResourcePersistenceException(Throwable cause) {
+        super(cause);
+    }
+
     public ResourcePersistenceException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public ResourcePersistenceException(Throwable cause) {
-        super(cause);
-    }
+
 }

@@ -37,16 +37,18 @@ public class UpdateUserRequest {
     @Length( message = ValidatorMessageUtil.PASSWORD_REQUIREMENTS, min = 8)
     private String password;
     private Users.Role role;
+    private boolean isActive;
 
     public Users extractResource() {
 
 
         if (role == null) {
-            return new Users(id, firstName, lastName, email, password, Users.Role.BUYER);
+            return new Users(id, firstName, lastName, email, password, Users.Role.BUYER, isActive);
         }
 
-        return new Users(id, firstName, lastName, email, password, role);
+        return new Users(id, firstName, lastName, email, password, role, isActive);
     }
+
     @Override
     public String toString() {
         return "UpdateUserRequest{" +
@@ -56,6 +58,9 @@ public class UpdateUserRequest {
                 ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
+                ", isActive=" + isActive +
                 '}';
     }
+
+
 }
