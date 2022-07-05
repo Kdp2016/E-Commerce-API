@@ -24,9 +24,11 @@ public class NewProductRequest {
     private Users seller;
     @NotNull
     private Products.Categories category;
+    @NotNull
+    private boolean isActive;
 
     public Products extractResource() {
-        return new Products(productName, productDescription, productImage, brand, price, seller, category);
+        return new Products(productName, productDescription, productImage, brand, price, seller, category, isActive);
     }
 
     @Override
@@ -39,6 +41,20 @@ public class NewProductRequest {
                 ", price=" + price +
                 ", seller=" + seller +
                 ", category=" + category +
+                ", isActive=" + isActive +
                 '}';
     }
+
+    //    @Override
+//    public String toString() {
+//        return "NewProductRequest{" +
+//                "productName='" + productName + '\'' +
+//                ", productDescription='" + productDescription + '\'' +
+//                ", productImage='" + productImage + '\'' +
+//                ", brand='" + brand + '\'' +
+//                ", price=" + price +
+//                ", seller=" + seller +
+//                ", category=" + category +
+//                '}';
+//    }
 }

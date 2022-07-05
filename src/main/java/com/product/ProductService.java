@@ -48,6 +48,18 @@ public class ProductService {
         return new ResourceCreationResponse(newProduct.getId());
     }
 
+
+    public void activateProduct(int id) {
+        productRepository.findById(id)
+                .orElseThrow(ResourceNotFoundException::new)
+                .setActive(true);
+    }
+
+    public void deactivateProduct(int id) {
+        productRepository.findById(id)
+                .orElseThrow(ResourceNotFoundException::new)
+                .setActive(false);
+
     public List<ProductResponse> search(Map<String, String> requestParamMap) {
         if (requestParamMap.isEmpty()) return getAllProducts();
         Set<Products> matchingUsers = entitySearcher.searchForEntity(requestParamMap, Products.class);
@@ -55,10 +67,6 @@ public class ProductService {
         return matchingUsers.stream()
                 .map(ProductResponse::new)
                 .collect(Collectors.toList());
-    }
-    public void deleteProductById(int id) {
-        productRepository.deleteById(id);
-
     }
 
     public void updateProduct (@Valid UpdateProductRequest updateProductRequest) {

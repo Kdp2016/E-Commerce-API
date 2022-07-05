@@ -28,11 +28,13 @@ public class Products {
     @Enumerated(EnumType.STRING)
     @Column(name = "category")
     private Categories category;
+    @Column(name = "isActive", nullable = false)
+    private boolean isActive;
 
     public Products() {
     }
 
-    public Products(int id, String productName, String productDescription, String productImage, String brand, double price, Users seller, Categories category) {
+    public Products(int id, String productName, String productDescription, String productImage, String brand, double price, Users seller, Categories category, boolean isActive) {
         this.id = id;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -41,9 +43,10 @@ public class Products {
         this.price = price;
         this.seller = seller;
         this.category = category;
+        this.isActive = isActive;
     }
 
-    public Products(String productName, String productDescription, String productImage, String brand, double price, Users seller, Categories category) {
+    public Products(String productName, String productDescription, String productImage, String brand, double price, Users seller, Categories category, boolean isActive) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.productImage = productImage;
@@ -51,9 +54,10 @@ public class Products {
         this.price = price;
         this.seller = seller;
         this.category = category;
+        this.isActive = isActive;
     }
 
-    public Products(int id, String brand, String productDescription, String productImage, String productName, Categories category, double price) {
+    public Products(int id, String brand, String productDescription, String productImage, String productName, Categories category, double price, boolean isActive) {
         this.id = id;
         this.brand = brand;
         this.productDescription = productDescription;
@@ -61,6 +65,7 @@ public class Products {
         this.productName = productName;
         this.category = category;
         this.price = price;
+        this.isActive = isActive;
     }
 
     public int getId() {
@@ -127,32 +132,37 @@ public class Products {
         this.category = category;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Products products = (Products) o;
-        return id == products.id && Double.compare(products.price, price) == 0 && Objects.equals(productName, products.productName) && Objects.equals(productDescription, products.productDescription) && Objects.equals(productImage, products.productImage) && Objects.equals(brand, products.brand) && Objects.equals(seller, products.seller) && Objects.equals(category, products.category);
+        return id == products.id && Double.compare(products.price, price) == 0 && isActive == products.isActive && Objects.equals(productName, products.productName) && Objects.equals(productDescription, products.productDescription) && Objects.equals(productImage, products.productImage) && Objects.equals(brand, products.brand) && Objects.equals(seller, products.seller) && category == products.category;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, productName, productDescription, productImage, brand, price, seller, category);
+        return Objects.hash(id, productName, productDescription, productImage, brand, price, seller, category, isActive);
     }
-
-    @Override
+    
+       @Override
     public String toString() {
-        return "Products{" +
-                "id=" + id +
-                ", productName='" + productName + '\'' +
-                ", productDescription='" + productDescription + '\'' +
-                ", productImage='" + productImage + '\'' +
-                ", brand='" + brand + '\'' +
+@@ -151,9 +177,25 @@ public String toString() {
                 ", price=" + price +
                 ", seller=" + seller +
                 ", category=" + category +
+                ", isActive=" + isActive +
                 '}';
     }
+
 
     public enum Categories {
         ELECTRONICS, CLOTHING, BOOKS, MOVIES, GAMES, TOYS, HOME, SPORTS, AUTOMOTIVE, TOOLS, HEALTH, BEAUTY, GARDEN, OUTDOORS, PETS, KIDS, FOOD, FASHION, GROCERY, MISC

@@ -43,10 +43,10 @@ public class ProductController {
         return productService.search(params);
     }
     
-    @PostMapping("/delete/{productId}")
-    public void deleteProductById(@PathVariable int productId) {
-        productService.deleteProductById(productId);
-    }
+//    @PostMapping("/delete/{productId}")
+//    public void deleteProductById(@PathVariable int productId) {
+//        productService.deleteProductById(productId);
+//    }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PatchMapping(consumes = "application/json")
@@ -54,4 +54,17 @@ public class ProductController {
         productService.updateProduct(updateProductInfo);
     }
 
+    @PatchMapping("/activation/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    //    @Secured(allowedRoles = {"ADMIN"})
+    public void activateUser(@RequestParam int id) {
+        productService.activateProduct(id);
+    }
+
+    @DeleteMapping("/delete/")
+//    @Secured(allowedRoles = {"ADMIN"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deactivateUser(@RequestParam int id) {
+        productService.deactivateProduct(id);
+    }
 }
