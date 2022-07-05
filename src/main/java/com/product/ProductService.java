@@ -43,8 +43,16 @@ public class ProductService {
         return new ResourceCreationResponse(newProduct.getId());
     }
 
-    public void deleteProductById(int id) {
-        productRepository.deleteById(id);
+    public void activateProduct(int id) {
+        productRepository.findById(id)
+                .orElseThrow(ResourceNotFoundException::new)
+                .setActive(true);
+    }
+
+    public void deactivateProduct(int id) {
+        productRepository.findById(id)
+                .orElseThrow(ResourceNotFoundException::new)
+                .setActive(false);
 
     }
 

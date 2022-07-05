@@ -16,6 +16,7 @@ public class ProductResponse {
     private double price;
     private int sellerId;
     private Products.Categories category;
+    private boolean isActive;
 
     public ProductResponse(Products product) {
         this.id = product.getId();
@@ -26,5 +27,6 @@ public class ProductResponse {
         this.price = product.getPrice();
         this.sellerId = product.getSeller().getId();
         this.category = product.getCategory();
+        this.isActive = product.isActive();
     }
 }

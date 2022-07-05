@@ -25,10 +25,11 @@ public class UpdateProductRequest {
     private String productImage;
 
     private String productName;
+    private boolean isActive;
 
     public Products extractResource() {
 
-        return new Products(id, brand, productDescription, productImage, productName, category, price);
+        return new Products(id, brand, productDescription, productImage, productName, category, price, isActive);
     }
 
     @Override
@@ -41,6 +42,8 @@ public class UpdateProductRequest {
                 ", productDescription='" + productDescription + '\'' +
                 ", productImage='" + productImage + '\'' +
                 ", productName='" + productName + '\'' +
+                ", isActive=" + isActive +
                 '}';
     }
+
 }
