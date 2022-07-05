@@ -152,6 +152,17 @@ public class Products {
     public int hashCode() {
         return Objects.hash(id, productName, productDescription, productImage, brand, price, seller, category, isActive);
     }
+    
+       @Override
+    public String toString() {
+@@ -151,9 +177,25 @@ public String toString() {
+                ", price=" + price +
+                ", seller=" + seller +
+                ", category=" + category +
+                ", isActive=" + isActive +
+                '}';
+    }
+
 
     public enum Categories {
         ELECTRONICS, CLOTHING, BOOKS, MOVIES, GAMES, TOYS, HOME, SPORTS, AUTOMOTIVE, TOOLS, HEALTH, BEAUTY, GARDEN, OUTDOORS, PETS, KIDS, FOOD, FASHION, GROCERY, MISC
