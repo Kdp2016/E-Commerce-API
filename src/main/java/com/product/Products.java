@@ -153,49 +153,6 @@ public class Products {
         return Objects.hash(id, productName, productDescription, productImage, brand, price, seller, category, isActive);
     }
 
-    //    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Products products = (Products) o;
-//        return id == products.id && Double.compare(products.price, price) == 0 && Objects.equals(productName, products.productName) && Objects.equals(productDescription, products.productDescription) && Objects.equals(productImage, products.productImage) && Objects.equals(brand, products.brand) && Objects.equals(seller, products.seller) && Objects.equals(category, products.category);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id, productName, productDescription, productImage, brand, price, seller, category);
-//    }
-
-    @Override
-    public String toString() {
-        return "Products{" +
-                "id=" + id +
-                ", productName='" + productName + '\'' +
-                ", productDescription='" + productDescription + '\'' +
-                ", productImage='" + productImage + '\'' +
-                ", brand='" + brand + '\'' +
-                ", price=" + price +
-                ", seller=" + seller +
-                ", category=" + category +
-                ", isActive=" + isActive +
-                '}';
-    }
-
-
-//    @Override
-//    public String toString() {
-//        return "Products{" +
-//                "id=" + id +
-//                ", productName='" + productName + '\'' +
-//                ", productDescription='" + productDescription + '\'' +
-//                ", productImage='" + productImage + '\'' +
-//                ", brand='" + brand + '\'' +
-//                ", price=" + price +
-//                ", seller=" + seller +
-//                ", category=" + category +
-//                '}';
-//    }
-
     public enum Categories {
         ELECTRONICS, CLOTHING, BOOKS, MOVIES, GAMES, TOYS, HOME, SPORTS, AUTOMOTIVE, TOOLS, HEALTH, BEAUTY, GARDEN, OUTDOORS, PETS, KIDS, FOOD, FASHION, GROCERY, MISC
     }
