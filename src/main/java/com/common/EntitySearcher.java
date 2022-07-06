@@ -2,6 +2,7 @@ package com.common;
 
 import com.common.utils.exceptions.InvalidRequestExceptions;
 import com.common.utils.exceptions.ResourceNotFoundException;
+import com.product.Products;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

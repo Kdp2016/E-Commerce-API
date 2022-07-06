@@ -52,16 +52,12 @@ public class MockDataInserter implements CommandLineRunner {
 
         //Breaks if we try this..
 
-        Orders order = new Orders(user,"123 street", Orders.Status.ORDERED, 123);
-
         userRepo.save(user);
         userRepo.save(user1);
         userRepo.save(user2);
         System.out.println(userRepo.findAll());
         productRepo.saveAll(productList);
         System.out.println(productRepo.findAll());
-        orderRepo.save(order);
-        System.out.println(orderRepo.findAll());
     }
 
     }
