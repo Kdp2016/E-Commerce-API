@@ -38,7 +38,7 @@ public class ProductService {
     }
 
     public ProductResponse getUserById(int id) throws Exception {
-        return productRepository.findById(id).map(ProductResponse::new).orElseThrow(Exception::new);
+        return productRepository.findById(id).map(ProductResponse::new).orElseThrow(ResourceNotFoundException::new);
     }
 
     public ResourceCreationResponse createProduct(@Valid NewProductRequest newProductRequest) {
@@ -59,7 +59,7 @@ public class ProductService {
         productRepository.findById(id)
                 .orElseThrow(ResourceNotFoundException::new)
                 .setActive(false);
-
+    }
     public List<ProductResponse> search(Map<String, String> requestParamMap) {
         if (requestParamMap.isEmpty()) return getAllProducts();
         Set<Products> matchingUsers = entitySearcher.searchForEntity(requestParamMap, Products.class);
@@ -68,6 +68,13 @@ public class ProductService {
                 .map(ProductResponse::new)
                 .collect(Collectors.toList());
     }
+
+    public List<ProductResponse> activeFilter() {
+        return productRepository.findAll().stream().filter(product -> product.isActive() == true).map(ProductResponse::new).collect(Collectors.toList());
+
+
+    }
+
 
     public void updateProduct (@Valid UpdateProductRequest updateProductRequest) {
 

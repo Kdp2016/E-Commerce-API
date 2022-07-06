@@ -27,6 +27,11 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
+    @GetMapping("/active")
+    public List<ProductResponse> getActiveProducts() {
+        return productService.activeFilter();
+    }
+
     @GetMapping("/id/{productId}")
     public ProductResponse getUserById(@PathVariable int productId) throws Exception {
         return productService.getUserById(productId);
