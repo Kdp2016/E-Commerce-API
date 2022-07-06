@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/orders")
@@ -41,11 +42,6 @@ public class OrderController {
         return orderService.getOrderById(orderId).getOrderItems();
     }
 
-    @PostMapping("/id/{orderId}")
-    public void addProductsToOrder(@PathVariable int orderId, @RequestBody List<NewOrderProductRequest> newProducts) {
-        orderService.addProductsToOrder(orderId, newProducts);
-    }
-
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = "application/json", produces = "application/json")
     public ResourceCreationResponse postNewOrder(@RequestBody NewOrderRequest newOrder) throws SQLException {
@@ -63,4 +59,11 @@ public class OrderController {
     public void updateOrderInfo(@RequestBody UpdateOrderRequest updateOrderInfo) {
         orderService.updateOrder(updateOrderInfo);
     }
+
+    @GetMapping("/search")
+    public List<OrderResponse> findBy(@RequestParam Map<String, String> params) {
+        return orderService.search(params);
+    }
+
+
 }
