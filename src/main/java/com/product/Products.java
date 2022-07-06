@@ -68,6 +68,10 @@ public class Products {
         this.isActive = isActive;
     }
 
+    public Products(int productId) {
+        this.id = productId;
+    }
+
     public int getId() {
         return id;
     }

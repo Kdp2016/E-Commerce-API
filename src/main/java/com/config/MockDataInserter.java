@@ -51,6 +51,7 @@ public class MockDataInserter implements CommandLineRunner {
                         "plastic bottles and trialing new refillable formats for certain select products.", "https://i5.walmartimages.com/asr/72cd6b24-3c70-4387-80cd-09fb68e1de3c.4172db0c319d85648550a83a92367bed.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF", "Dove", 6.97, user, Products.Categories.BEAUTY, true)));
 
         //Breaks if we try this..
+
         Orders order = new Orders(user,"123 street", Orders.Status.ORDERED, 123);
 
         userRepo.save(user);

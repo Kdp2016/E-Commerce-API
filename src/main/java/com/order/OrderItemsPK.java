@@ -12,12 +12,12 @@ import java.util.Objects;
 
 @Embeddable
 public class OrderItemsPK implements Serializable {
-    @JsonBackReference
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+
+    @ManyToOne(optional = false)
     @JoinColumn(name = "order_id")
     private Orders order;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "product_id")
     private Products product;
 
@@ -27,6 +27,11 @@ public class OrderItemsPK implements Serializable {
     public OrderItemsPK(Orders order, Products product) {
         this.order = order;
         this.product = product;
+    }
+
+    public OrderItemsPK(int orderId, int productId) {
+        this.order = new Orders(orderId);
+        this.product = new Products(productId);
     }
 
     public Orders getOrder() {
@@ -58,11 +63,4 @@ public class OrderItemsPK implements Serializable {
         return Objects.hash(order, product);
     }
 
-    @Override
-    public String toString() {
-        return "OrderItemsPK{" +
-                "order=" + order +
-                ", product=" + product +
-                '}';
-    }
 }

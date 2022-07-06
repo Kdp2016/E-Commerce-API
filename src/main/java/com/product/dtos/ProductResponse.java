@@ -1,9 +1,12 @@
 package com.product.dtos;
 
+import com.order.OrderItems;
 import com.product.Products;
 import com.user.Users;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Optional;
 
 @Data
 @NoArgsConstructor
@@ -28,5 +31,12 @@ public class ProductResponse {
         this.sellerId = product.getSeller().getId();
         this.category = product.getCategory();
         this.isActive = product.isActive();
+    }
+
+    public ProductResponse(OrderItems orderItems) {
+        this(orderItems.getPk().getProduct());
+    }
+
+    public ProductResponse(Optional<Products> products) {
     }
 }
