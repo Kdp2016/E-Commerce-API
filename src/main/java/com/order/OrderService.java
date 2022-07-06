@@ -6,9 +6,12 @@ import com.order.dto.NewOrderProductRequest;
 import com.order.dto.NewOrderRequest;
 import com.order.dto.OrderResponse;
 import com.common.utils.exceptions.ResourcePersistenceException;
+import com.order.dto.UpdateOrderRequest;
 import com.product.ProductRepository;
+import com.product.Products;
 import com.product.dtos.ProductResponse;
 
+import com.product.dtos.UpdateProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -86,5 +89,15 @@ public class OrderService {
         // Map the fetched products to be OrderItems
         // add mapped order items to order (.setOrderItems)
 
+    }
+    public void updateOrder (@Valid UpdateOrderRequest updateOrderRequest) {
+
+        Orders updatedOrder = updateOrderRequest.extractResource();
+        Orders orderForUpdate = orderRepository.findById(updatedOrder.getId()).orElseThrow(ResourceNotFoundException::new);
+
+        if (updatedOrder.getStatus() != null) {
+            orderForUpdate.setStatus(updatedOrder.getStatus());
+        }
+        orderRepository.save(orderForUpdate);
     }
 }

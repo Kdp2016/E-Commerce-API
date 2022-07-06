@@ -4,7 +4,9 @@ import com.common.utils.ResourceCreationResponse;
 import com.order.dto.NewOrderProductRequest;
 import com.order.dto.NewOrderRequest;
 import com.order.dto.OrderResponse;
+import com.order.dto.UpdateOrderRequest;
 import com.product.dtos.ProductResponse;
+import com.product.dtos.UpdateProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -53,5 +55,12 @@ public class OrderController {
     @PostMapping("/delete/{orderId}")
     public void deleteOrderById(@PathVariable int orderId) {
         orderService.deleteOrderById(orderId);
+    }
+
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping(consumes = "application/json")
+    public void updateOrderInfo(@RequestBody UpdateOrderRequest updateOrderInfo) {
+        orderService.updateOrder(updateOrderInfo);
     }
 }

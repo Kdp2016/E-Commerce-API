@@ -62,6 +62,11 @@ public class Orders {
         this.total = total;
     }
 
+    public Orders(int id, Status status) {
+        this.id = id;
+        this.status = status;
+    }
+
     public Orders(int orderId) {
         this.id = orderId;
     }
