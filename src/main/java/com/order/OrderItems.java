@@ -2,6 +2,7 @@ package com.order;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.product.Products;
+import com.product.dtos.ProductResponse;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -10,32 +11,23 @@ import java.util.Objects;
 @Table(name = "orderItems")
 public class OrderItems {
     @EmbeddedId
-    @JsonIgnore
     private OrderItemsPK pk;
 
     @Column(nullable = false)
     private int quantity;
 
+    public OrderItems() {
+        super();
+    }
+
+    public OrderItems(int orderId, int productId, int quantity) {
+        this.pk = new OrderItemsPK(orderId, productId);
+        this.quantity = quantity;
+    }
+
     public OrderItems(OrderItemsPK pk, int quantity) {
         this.pk = pk;
         this.quantity = quantity;
-    }
-
-    public OrderItems(Orders order, Products product, int quantity) {
-        pk = new OrderItemsPK();
-        pk.setOrder(order);
-        pk.setProduct(product);
-        this.quantity = quantity;
-    }
-
-    @Transient
-    public Products getProduct() {
-        return this.pk.getProduct();
-    }
-
-    @Transient
-    public Double getTotalPrice() {
-        return getProduct().getPrice() * getQuantity();
     }
 
     public OrderItemsPK getPk() {
@@ -54,6 +46,8 @@ public class OrderItems {
         this.quantity = quantity;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,7 +64,8 @@ public class OrderItems {
     @Override
     public String toString() {
         return "OrderItem{" +
-                "pk=" + pk +
+                "orderId=" + pk.getOrder().getId() +
+                ", productId=" + pk.getProduct().getId() +
                 ", quantity=" + quantity +
                 '}';
     }

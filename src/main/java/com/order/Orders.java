@@ -2,17 +2,21 @@ package com.order;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.order.dto.NewOrderProductRequest;
 import com.user.Users;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-
+import javax.validation.constraints.NotNull;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "orders")
@@ -21,25 +25,28 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id", nullable = false, unique = true)
     private int id;
+
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private Users buyer;
+
     @Column(name = "address", nullable = false)
     private String address;
-    @JsonManagedReference
+
     @OneToMany(mappedBy = "pk.order")
-    @Valid
     private List<OrderItems> orderItems;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private Status status;
+
     @Column(name = "total", nullable = false)
-    private float total;
+    private double total;
 
     public Orders() {
     }
 
-    public Orders(int id, Users buyer, String address, List<OrderItems> orderItems, Status status, float total) {
+    public Orders(int id, Users buyer, String address, List<OrderItems> orderItems, Status status, double total) {
         this.id = id;
         this.buyer = buyer;
         this.address = address;
@@ -48,13 +55,15 @@ public class Orders {
         this.total = total;
     }
 
-//    public Orders(Users buyer, String address, List<OrderItems> orderItems, Status status, float total) {
-        public Orders(Users buyer, String address, Status status, float total) {
+    public Orders(Users buyer, String address, Status status, double total) {
         this.buyer = buyer;
         this.address = address;
-//        this.orderItems = orderItems;
         this.status = status;
         this.total = total;
+    }
+
+    public Orders(int orderId) {
+        this.id = orderId;
     }
 
     public int getId() {
@@ -89,6 +98,13 @@ public class Orders {
         this.orderItems = orderItems;
     }
 
+    public void addOrderItems(OrderItems... orderItems) {
+        if (this.orderItems == null) {
+            this.orderItems = new ArrayList<>();
+        }
+        this.orderItems.addAll(Arrays.asList(orderItems));
+    }
+
     public Status getStatus() {
         return status;
     }
@@ -97,11 +113,11 @@ public class Orders {
         this.status = status;
     }
 
-    public float getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(float total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
@@ -110,7 +126,7 @@ public class Orders {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Orders orders = (Orders) o;
-        return id == orders.id && Float.compare(orders.total, total) == 0 && Objects.equals(buyer, orders.buyer) && Objects.equals(address, orders.address) && Objects.equals(orderItems, orders.orderItems) && status == orders.status;
+        return id == orders.id && Double.compare(orders.total, total) == 0 && Objects.equals(buyer, orders.buyer) && Objects.equals(address, orders.address) && Objects.equals(orderItems, orders.orderItems) && status == orders.status;
     }
 
     @Override
@@ -133,5 +149,6 @@ public class Orders {
     public enum Status {
         ORDERED, DELIVERED, CANCELLED;
     }
+
 }
 

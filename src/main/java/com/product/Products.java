@@ -63,6 +63,10 @@ public class Products {
         this.price = price;
     }
 
+    public Products(int productId) {
+        this.id = productId;
+    }
+
     public int getId() {
         return id;
     }
