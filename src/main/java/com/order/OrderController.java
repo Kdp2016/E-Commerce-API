@@ -1,10 +1,7 @@
 package com.order;
 
 import com.common.utils.ResourceCreationResponse;
-import com.order.dto.NewOrderProductRequest;
-import com.order.dto.NewOrderRequest;
-import com.order.dto.OrderResponse;
-import com.order.dto.UpdateOrderRequest;
+import com.order.dto.*;
 import com.product.dtos.ProductResponse;
 import com.product.dtos.UpdateProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +29,7 @@ public class OrderController {
     }
 
     @GetMapping("/seller/{sellerId}")
-    public List<Orders> getAllOrdersBySeller(@PathVariable int sellerId){
+    public List<NewOrderResponse> getAllOrdersBySeller(@PathVariable int sellerId){
         return orderService.getOrderBySellerId(sellerId);
     }
 
