@@ -43,6 +43,7 @@ public class ProductService {
 
     public ResourceCreationResponse createProduct(@Valid NewProductRequest newProductRequest) {
         Products newProduct = newProductRequest.extractResource();
+        newProduct.setActive(true);
 
         productRepository.save(newProduct);
         return new ResourceCreationResponse(newProduct.getId());

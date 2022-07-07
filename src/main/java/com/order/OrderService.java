@@ -49,6 +49,10 @@ public class OrderService {
                 .map(OrderResponse::new)
                 .collect(Collectors.toList());
     }
+
+    public List<Orders> getOrderBySellerId(int id){
+        return orderRepository.getOrdersBySellerId(id);
+    }
     public OrderResponse getOrderById(int id) {
         return orderRepository.findById(id)
                 .map(OrderResponse::new)
