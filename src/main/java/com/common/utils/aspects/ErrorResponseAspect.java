@@ -56,6 +56,7 @@ public class ErrorResponseAspect {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponse handleOtherExceptions(Throwable t) {
+        t.printStackTrace();
         return new ErrorResponse(500, Collections.singletonList("An internal server error occurred. Devs, please check logs."));
     }
 }

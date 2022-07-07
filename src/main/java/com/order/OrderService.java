@@ -3,11 +3,8 @@ package com.order;
 import com.common.EntitySearcher;
 import com.common.utils.ResourceCreationResponse;
 import com.common.utils.exceptions.ResourceNotFoundException;
-import com.order.dto.NewOrderProductRequest;
-import com.order.dto.NewOrderRequest;
-import com.order.dto.OrderResponse;
+import com.order.dto.*;
 import com.common.utils.exceptions.ResourcePersistenceException;
-import com.order.dto.UpdateOrderRequest;
 import com.product.ProductRepository;
 import com.product.Products;
 import com.product.dtos.ProductResponse;
@@ -50,8 +47,11 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
-    public List<Orders> getOrderBySellerId(int id){
-        return orderRepository.getOrdersBySellerId(id);
+    public List<NewOrderResponse> getOrderBySellerId(int id){
+        return orderRepository.getOrdersBySellerId(id)
+                              .stream()
+                              .map(NewOrderResponse::new)
+                              .collect(Collectors.toList());
     }
     public OrderResponse getOrderById(int id) {
         return orderRepository.findById(id)
@@ -70,9 +70,9 @@ public class OrderService {
      */
     public ResourceCreationResponse createOrder(@Valid NewOrderRequest newOrderRequest) {
 
-        Orders newOrder = newOrderRequest.extractResource(); // transient state (not associated with a DB record)
+        Orders newOrder = newOrderRequest.extractResource();
 
-        orderRepository.save(newOrder); // after this line newOrder goes to the persistent state
+        orderRepository.save(newOrder);
 
         List<OrderItems> orderItems = newOrderRequest.getOrderItems().stream().map(item -> {
             return new OrderItems(newOrder.getId(), item.getProductId(), item.getQuantity());
